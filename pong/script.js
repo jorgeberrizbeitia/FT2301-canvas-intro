@@ -123,3 +123,12 @@ window.addEventListener("load", gameLoop)
 
 window.addEventListener("keydown", movePaddle)
 
+
+
+// BONUS
+
+// paletas no puedan salir de la pantalla
+// pelota aumente valocidad cuando colisione con la paleta (o al tiempo)
+// pelota disminuya su tamaño
+// crear un score y manipularlo con DOM
+
