@@ -13,6 +13,12 @@ let isBallGoingRight = true;
 let isBallGoingDown = true;
 let ballSpeed = 4;
 
+let paddleX = 200;
+let paddleY = 700;
+let paddleWidth = 150;
+let paddleHeight = 30;
+let paddleSpeed = 30;
+
 
 // - funciones
 const drawBall = () => {
@@ -41,7 +47,7 @@ const moveBall = () => {
 const colissionBallWall = () => {
   // la posicion de la pelotita X deberia ser menor CW
   if (ballX > canvas.width - ballRadius) {
-    console.log("pelotita colision pared derecha")
+    // console.log("pelotita colision pared derecha")
     // la pelotita deberia empezar a moverse a la izquierda.  -- en la posX
     isBallGoingRight = false;
   }
@@ -59,6 +65,28 @@ const colissionBallWall = () => {
   }
 }
 
+const drawPaddle = () => {
+  ctx.fillStyle = "white";
+  ctx.fillRect(paddleX, paddleY, paddleWidth, paddleHeight)
+}
+
+const movePaddle = (event) => {
+  // console.log(event.code)
+  if (event.code === "ArrowLeft") {
+    paddleX -= paddleSpeed
+  }
+  if (event.code === "ArrowRight") {
+    paddleX += paddleSpeed
+  }
+}
+
+const colissionBallPaddle = () => {
+  if (ballY > paddleY && ballX > paddleX && ballX < (paddleX + paddleWidth)) {
+    // console.log("ha colisionado con la paleta")
+    isBallGoingDown = false;
+  }
+}
+
 
 // - funcion de recursion
 const gameLoop = () => {
@@ -70,10 +98,12 @@ const gameLoop = () => {
   // 2. movimiento y acciones de todos los elementos
   moveBall()
   colissionBallWall()
+  colissionBallPaddle()
 
   
   // 3. dibujado de todos los elementos
   drawBall()
+  drawPaddle()
 
 
   // 4. recursion
@@ -84,3 +114,6 @@ const gameLoop = () => {
 
 // - addEventListeners
 window.addEventListener("load", gameLoop)
+
+window.addEventListener("keydown", movePaddle)
+
