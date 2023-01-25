@@ -19,6 +19,8 @@ let paddleWidth = 150;
 let paddleHeight = 30;
 let paddleSpeed = 30;
 
+let isGameOn = true;
+
 
 // - funciones
 const drawBall = () => {
@@ -53,7 +55,9 @@ const colissionBallWall = () => {
   }
 
   if (ballY > canvas.height - ballRadius) {
-    isBallGoingDown = false;
+    // isBallGoingDown = false;
+    // detener la recursion del juego => GAME OVER
+    isGameOn = false;
   }
 
   if (ballX < 0 + ballRadius) {
@@ -107,7 +111,9 @@ const gameLoop = () => {
 
 
   // 4. recursion
-  requestAnimationFrame(gameLoop)
+  if (isGameOn === true) {
+    requestAnimationFrame(gameLoop)
+  }
 
 }
 
