@@ -83,3 +83,79 @@ ctx.stroke()
 ctx.fill()
 
 ctx.closePath()
+
+
+
+
+
+// Imagenes
+
+let imgDOM = new Image()
+imgDOM.src = "https://tinyurl.com/ironhack-pokemons/25.svg";
+
+
+
+imgDOM.addEventListener("load", () => {
+  // ctx.drawImage(imgDOM, 40, 400, 80, 80)
+  ctx.drawImage(imgDOM, 40, 400) // usa la resolucion original del archivo
+})
+// 1. la imagen
+// 2-5 los mismos del fillRect
+// NOTA: los dos ultimos argumentos son opcionales
+
+
+// recursion
+
+// let control = 0;
+
+// function printSomething() {
+//   console.log("recursion ocurriendo")
+  
+//   control++
+//   if (control < 100) {
+//     printSomething()
+//   }
+//   // control >= 100; se termina la recursion
+// }
+
+
+// printSomething()
+
+
+// crear una animacion con recursion y canvas
+
+
+
+let controlCube = 0;
+let cubePosX = 50;
+let cubePosY = 500;
+
+function moveCube() {
+  console.log("intentando mover el cubo")
+
+  // 1. limpiar el canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+  // 2. mueve el cubo 1 px a la derecha
+  cubePosX = cubePosX + 1
+  cubePosY = cubePosY - 1
+
+  // 3. dibujar el elemento
+  // ctx.fillRect(cubePosX, 700, 50, 50)
+  // imgDOM.addEventListener("load", () => {
+    ctx.drawImage(imgDOM, cubePosX, cubePosY) // usa la resolucion original del archivo
+  // })
+
+
+  // 4. efecto de recursion
+  controlCube++
+  if (controlCube <= 200) {
+    // moveCube()
+    // animationFrames => controlar una recursion
+    // con tasa de refresco de la pantalla 60fps
+    requestAnimationFrame(moveCube) // le pasamos es la funcion a invocar
+  }
+}
+
+moveCube()
+
